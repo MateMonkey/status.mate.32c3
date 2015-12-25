@@ -1,0 +1,127 @@
+'use strict';
+
+var app = angular.module('status.mate.32c3',
+                         [
+                            'config.api',
+                            'ngRoute',
+                            'pascalprecht.translate',
+                            'status.mate.32c3.dealer'
+                         ])
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  $routeProvider.otherwise({redirectTo: '/'});
+  $locationProvider.hashPrefix('!');
+  $locationProvider.html5Mode(true);
+}])
+.config(['$translateProvider', function($translateProvider) {
+  $translateProvider.translations('en', {
+    just_now: 'just now',
+    seconds_ago: '{{time}} seconds ago',
+    a_minute_ago: 'a minute ago',
+    minutes_ago: '{{time}} minutes ago',
+    an_hour_ago: 'an hour ago',
+    hours_ago: '{{time}} hours ago',
+    a_day_ago: 'yesterday',
+    days_ago: '{{time}} days ago',
+    a_week_ago: 'a week ago',
+    weeks_ago: '{{time}} weeks ago',
+    a_month_ago: 'a month ago',
+    months_ago: '{{time}} months ago',
+    a_year_ago: 'a year ago',
+    years_ago: '{{time}} years ago',
+    over_a_year_ago: 'over a year ago',
+    seconds_from_now: '{{time}} seconds from now',
+    a_minute_from_now: 'a minute from now',
+    minutes_from_now: '{{time}} minutes from now',
+    an_hour_from_now: 'an hour from now',
+    hours_from_now: '{{time}} hours from now',
+    a_day_from_now: 'tomorrow',
+    days_from_now: '{{time}} days from now',
+    a_week_from_now: 'a week from now',
+    weeks_from_now: '{{time}} weeks from now',
+    a_month_from_now: 'a month from now',
+    months_from_now: '{{time}} months from now',
+    a_year_from_now: 'a year from now',
+    years_from_now: '{{time}} years from now',
+    over_a_year_from_now: 'over a year from now',
+    StockEntryCreated: 'Stock Entry created',
+    DealerCreated: 'Dealer created',
+    DealerUpdated: 'Dealer updated'
+  });
+  $translateProvider.preferredLanguage('en');
+  $translateProvider.useSanitizeValueStrategy(null);
+}])
+.service('urlfor', ['apiConfig', function(apiConfig) {
+  return {
+    get : function(url, arg) {
+        switch(url) {
+          case "dealers":
+            return apiConfig.base_url + '/api/v1/dealers';
+          case "dealersSlug":
+            return apiConfig.base_url + '/api/v1/dealers/slug/' + arg;
+          case "updateDealer":
+            return apiConfig.base_url + '/api/v1/dealers/' + arg;
+          case "stock":
+            return apiConfig.base_url + '/api/v1/dealers/' + arg + "/stock";
+          case "products":
+            return apiConfig.base_url + '/api/v1/products';
+          case "search":
+            return apiConfig.base_url + '/api/v1/search';
+          case "changes":
+            return apiConfig.base_url + '/api/v1/changes';
+        }
+        return "";
+    }
+  }
+}])
+.filter('capfirst', function() {
+  return function(input) {
+    input = input || '';
+    return input.charAt(0).toUpperCase() +
+           input.slice(1).toLowerCase();
+  }
+})
+.filter('div100', function() {
+  return function(input) {
+    if (input == '?')
+      return input;
+    else
+      return (input/100);
+  }
+})
+.filter('date2', function () {
+  return function(input) {
+    return Date.parse(input);
+  }
+})
+.filter('fixhttp', function() {
+  return function(input) {
+    if (!angular.isString(input)) {
+      return input;
+    }
+    if (input.length > 0) {
+      if (input.indexOf("http") === 0) {
+        return input;
+      } else {
+        return "http://" + input;
+      }
+    } else {
+      return input;
+    }
+  }
+})
+.directive('ensurefloat', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, elm, attrs, ctrl) {
+      ctrl.$validators.isfloat = function(modelValue, viewValue) {
+        if (ctrl.$isEmpty(modelValue)) {
+          return true;
+        }
+        if (isNaN(viewValue)) {
+          return false;
+        }
+        return true;
+      }
+    }
+  }
+});

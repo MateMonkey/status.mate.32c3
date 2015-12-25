@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="status.mate.32c3">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Selected matemonkey.com dealers for 32c3">
+    <title>status.mate.32c3</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div id="header">
+      <div id="headline">
+        <h1>status.mate.</h1>
+      </div>
+      <div style="float: left">
+        <img src="img/32c3.png"/>
+      </div>
+    </div>
+    <div id="subheader">
+      Don't drink unregistered mate
+    </div>
+    <div>
+      <a href="https://matemonkey.com">main site</a>
+      <a href="https://twitter.com/matemonkeycom">twitter</a>
+      <a href="https://github.com/matemonkey">github</a>
+    </div>
+    <div ng-controller="DealerController">
+      {{lastmsg}}
+      <div ng-repeat="dealer in dealers">
+        <h2>{{dealer.name}}</h2>
+        <i>{{dealer.description}}</i>
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Last Update</th>
+          </tr>
+          <tr ng-repeat="entry in dealer.stock">
+            <td>
+              <span class="entry.name">
+              <b>{{entry.product.name}}</b>
+              </span>
+            </td>
+            <td>
+              <small ng-if="entry.price == '?'">{{entry.price}} / {{entry.quantity | capfirst}}</small>
+              <small ng-if="entry.price != '?'">{{entry.price | div100 | isoCurrency:dealer.currency}} / {{entry.quantity | capfirst}}</small>
+            </td>
+            <td>
+              <select ng-model="entry.status" class="status" ng-change="update(dealer, entry, entry.status)">
+                <option class="label-full" value="full" ng-selected="entry.status == 'full'">Full</option>
+                <option class="label-low" value="low" ng-selected="entry.status == 'low'">Low</option>
+                <option class="label-sold-out" value="sold-out" ng-selected="entry.status == 'sold-out'">Sold-Out</option>
+              </select>
+            </td>
+            <td>
+              <small>{{entry.created_at | date2 | relativeDate}}</small>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script src="js/vendor.js"></script>
+  <script src="js/app.js"></script>
+</html>
+

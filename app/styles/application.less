@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+@font-family: "Roboto Condensed";
+@font-size-base: 14px;
+@font-size-small: ceil((@font-size-base * 0.85));
+
+html {
+  font-family: @font-family;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+a {
+  color: #ffffff;
+}
+
+#headline {
+  margin-top: 37px;
+  float: left;
+}
+
+#header {
+  
+}
+
+#subheader {
+  font-style: italic;
+  margin: 0px;
+}
+
+#header:after {
+  content:'';
+  display:block;
+  clear: both;
+}
+
+.label {
+  font-size: @font-size-small;
+  padding: 1px;
+  margin: 1px;
+}
+
+.label-unknown {
+  background-color: #aaaaaa;
+}
+
+.label-sold-out {
+  background-color: #E60700;
+}
+
+.label-low {
+  background-color: #F28900;
+}
+
+.label-full {
+  background-color: #06AD00;
+}
+
+.label-discontinued {
+  background-color: #A700AD;
+}
+
+
