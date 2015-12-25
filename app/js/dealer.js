@@ -6,6 +6,7 @@ angular.module('status.mate.32c3.dealer',["ngSanitize", "relativeDate", "isoCurr
   $scope.dealer_slugs = ["32c3-hall1", "32c3-lounge"]
 
   $scope.dealers = []
+  $scope.lastmsg = ""
 
   $scope.loadStock = function(dealer) {
     $http({
@@ -17,6 +18,7 @@ angular.module('status.mate.32c3.dealer',["ngSanitize", "relativeDate", "isoCurr
     }).success(function(data) {
       dealer.stock = data['entries'];
     }).error(function(data) {
+      $scope.lastmsg = "ERROR: Unable to fetch stock for dealer ID " + dealer.id + '.';
     });
   }
 
@@ -28,6 +30,8 @@ angular.module('status.mate.32c3.dealer',["ngSanitize", "relativeDate", "isoCurr
       }).success(function(data) {
         $scope.dealers.push(data);
         $scope.loadStock(data);
+      }).error(function(data) {
+        $scope.lastmsg = "ERROR: Unable to load dealer.";
       });
     });
   }
@@ -44,7 +48,11 @@ angular.module('status.mate.32c3.dealer',["ngSanitize", "relativeDate", "isoCurr
       data: data
     }).success(function(data) {
       $scope.loadStock(dealer);
-    });
+      $scope.lastmsg = "Stock updated. Thanks!";
+    }).error(function(data) {
+      $scope.lastmsg = "ERROR: Unable to update stock.";
+    }
+    );
   }
   $scope.loadDealers();
 }]);
