@@ -24,9 +24,9 @@
       <a href="https://twitter.com/matemonkeycom">twitter</a>
       <a href="https://github.com/matemonkey">github</a>
     </div>
-    <div ng-controller="DealerController">
+    <div ng-controller="DealerController" id="dealers">
       {{lastmsg}}
-      <div ng-repeat="dealer in dealers">
+      <div ng-repeat="dealer in dealers" class="dealer">
         <h2>{{dealer.name}}</h2>
         <i>{{dealer.description}}</i>
         <table>
