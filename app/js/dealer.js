@@ -3,7 +3,7 @@
 angular.module('status.mate.32c3.dealer',["ngSanitize", "relativeDate", "isoCurrency"])
 .controller('DealerController', ['$scope', '$rootScope', '$http', 'urlfor',
             function($scope, $rootScope, $http, urlfor) {
-  $scope.dealer_slugs = ["32c3-hall1", "32c3-lounge"]
+  $scope.dealer_slugs = ["32c3-hall1", "32c3-lounge", "32c3-saal-3", "32c3-foyer-saal-g"]
 
   $scope.dealers = []
   $scope.lastmsg = ""
