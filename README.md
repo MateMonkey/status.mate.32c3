@@ -1,5 +1,15 @@
 # MateMonkey.com 32c3 Frontend
 
+## Dealer Filter
+
+The slugs for the 32c3 dealers are
+* 32c3-hall1
+* 32c3-lounge
+* 32c3-saal-3
+* 32c3-foyer-saal-g
+
+(used in `app/js/dealer.js`)
+
 ## Development
 
 This project uses [Brunch](http://brunch.io) to build the final product.
