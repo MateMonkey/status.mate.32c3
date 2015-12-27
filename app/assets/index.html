@@ -24,6 +24,9 @@
       <a href="https://twitter.com/matemonkeycom">twitter</a>
       <a href="https://github.com/matemonkey">github</a>
     </div>
+    <div id="info">
+      <a href="https://twitter.com/MetaMateBerlin">metamate.cc</a> has 10kg of yerba mate available which will arrive this afternoon (27th). Check out their stand on 32c3!
+    </div>
     <div ng-controller="DealerController" id="dealers">
       {{lastmsg}}
       <div ng-repeat="dealer in dealers" class="dealer">
@@ -48,7 +51,7 @@
             </td>
             <td>
               <select ng-model="entry.status" class="status" ng-change="update(dealer, entry, entry.status)">
-                <option class="label-full" value="full">Full</option>
+                 <option class="label-full" value="full">Full</option>
                 <option class="label-low" value="low">Low</option>
                 <option class="label-sold-out" value="sold-out">Sold-Out</option>
               </select>

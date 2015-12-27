@@ -3,6 +3,7 @@
 @font-family: "Roboto Condensed";
 @font-size-base: 14px;
 @font-size-small: ceil((@font-size-base * 0.85));
+@site-width: 800px;
 
 html {
   font-family: @font-family;
@@ -23,6 +24,13 @@ a {
   
 }
 
+#info {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ffffff;
+  width: @site-width;
+}
+
 #subheader {
   font-style: italic;
   margin: 0px;
@@ -35,7 +43,7 @@ a {
 }
 
 #dealers {
-  width: 800px;
+  width: @site-width;
   height: 100%;
 }
 
